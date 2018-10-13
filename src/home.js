@@ -1,23 +1,55 @@
 import React, { PureComponent } from "react";
 
-class Home extends PureComponent {
+class UserRow extends PureComponent {
     render() {
         return (
-            <div>
-                <h2>HELLO</h2>
-                <p>
-                    Cras facilisis urna ornare ex volutpat, et convallis erat
-                    elementum. Ut aliquam, ipsum vitae gravida suscipit, metus
-                    dui bibendum est, eget rhoncus nibh metus nec massa.
-                    Maecenas hendrerit laoreet augue nec molestie. Cum sociis
-                    natoque penatibus et magnis dis parturient montes, nascetur
-                    ridiculus mus.
-                </p>
-
-                <p>Duis a turpis sed lacus dapibus elementum sed eu lectus.</p>
-            </div>
+            <tr>
+                <td>{this.props.user.name}</td>
+                <td>{this.props.user.phone}</td>
+                <td>{this.props.user.email}</td>
+            </tr>
         );
     }
 }
 
+class Home extends PureComponent {
+    constructor(props) {
+      super(props);
+      this.state = {
+        contacts: [
+          { name: "Tom Jackson", phone: "555-444-333", email: "tom@gmail.com" },
+          { name: "Mike James", phone: "555-777-888", email: "mikejames@gmail.com" },
+          {
+              name: "Janet Larson",
+              phone: "555-222-111",
+              email: "janetlarson@gmail.com"
+          },
+          {
+              name: "Clark Thompson",
+              phone: "555-444-333",
+              email: "clark123@gmail.com"
+          },
+          { name: "Emma Page", phone: "555-444-333", email: "emma1page@gmail.com" }
+      ]
+      }
+    }
+
+    render() {
+        const rows = this.state.contacts.map(user => {
+            return <UserRow user={user} />;
+        });
+        return (
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>{rows}</tbody>
+            </table>
+        );
+    }
+}
 export default Home;

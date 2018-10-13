@@ -1,8 +1,11 @@
 import React, { PureComponent } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import RouteComponent from "./route";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import Home from "./home";
+import Profile from "./profile";
+import University from "./university";
 
 class Main extends PureComponent {
+    
     render() {
         return (
             <Router>
@@ -10,17 +13,21 @@ class Main extends PureComponent {
                     <h1>EduRate</h1>
                     <ul className="header">
                         <li>
-                            <Link to="/home">Anasayfa</Link>
+                            <Link to="/">Anasayfa</Link>
                         </li>
                         <li>
-                            <Link to="/profile">Profil</Link>
+                            <Link to="/profile/1">Profil</Link>
                         </li>
                         <li>
                             <Link to="/university">Universite</Link>
                         </li>
                     </ul>
                     <div className="content">
-                        <Route exact path="/:id" component={RouteComponent} />
+                        <Switch>
+                            <Route exact path="/" component={Home} />
+                            <Route path="/profile/:id" component={Profile} />
+                            <Route path="/university" component={University} />
+                        </Switch>
                     </div>
                 </div>
             </Router>
